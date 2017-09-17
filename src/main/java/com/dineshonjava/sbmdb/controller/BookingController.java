@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dineshonjava.sbmdb.models.Booking;
 import com.dineshonjava.sbmdb.models.BookingRepository;
+import com.dineshonjava.sbmdb.utils.SpringLoggingHelper;
 
 /**
  * @author Dinesh.Rajput
@@ -23,6 +26,7 @@ import com.dineshonjava.sbmdb.models.BookingRepository;
 @RestController
 @RequestMapping("/booking")
 public class BookingController {
+	private static final Logger logger = LoggerFactory.getLogger(BookingController.class);
 	
 	@Autowired
 	BookingRepository bookingRepository;
@@ -91,6 +95,11 @@ public class BookingController {
 		dataMap.put("totalBooking", bookings.size());
 		dataMap.put("status", "1");
 		dataMap.put("bookings", bookings);
+		
+		//Logback example line
+		logger.debug("This is booking debug message");
+		new SpringLoggingHelper().helpMethod();
+		
 	    return dataMap;
 	}
 }
